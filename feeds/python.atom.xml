@@ -2,5 +2,4 @@
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Programming Journey</title><link href="/" rel="alternate"></link><link href="/feeds/python.atom.xml" rel="self"></link><id>/</id><updated>2014-01-12T14:42:00+01:00</updated><entry><title>My First Pelican Post</title><link href="/my-first-post.html" rel="alternate"></link><updated>2014-01-12T14:42:00+01:00</updated><author><name>Hsiang-Ho Lin</name></author><id>tag:,2014-01-12:my-first-post.html</id><summary type="html">&lt;p&gt;I basically followed this post:&lt;/p&gt;
 &lt;p&gt;&lt;a href="http://martinbrochhaus.com/pelican2.html"&gt;http://martinbrochhaus.com/pelican2.html&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;But I got this error message when starting the Pelican developer server by "make devserver". The error message is "'bool' object is not callable". Turns out I need to install markdown by "pip install markdown".&lt;/p&gt;
-&lt;p&gt;Now I need to learn some markdown syntaxes.&lt;/p&gt;
-&lt;p&gt;Thank you Martin!&lt;/p&gt;</summary><category term="pelican"></category></entry></feed>
+&lt;p&gt;Now I need to learn some markdown syntaxes.&lt;/p&gt;</summary><category term="pelican"></category></entry></feed>
