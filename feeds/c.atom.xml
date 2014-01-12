@@ -10,9 +10,8 @@ The main idea here is to iterate the ring once and we can dynamically sum up the
 2. Supposing we only have red and blue beans, while iterating the string from head to tail, we accumulate beans with same color, and if we have encountered a different color from what we are collecting now (let's call it a "color change"), we will store the current number of same color beans and start accumulate beans with the other color. In the meanwhile of "color change", we are going to sum up the past two numbers of different color beans collection, and compare it to the maximum number, if the sum is greater, replace the maximum number with the sum.
 For instance, when we encounter the 5th bean "r" in rrbbrrrb, we have already stored the number of first 2 "r"s, 2, and the 3rd and 4th beans "b"s, 2, so now we got 2+2=4 to be our maximum. If we encounter the 8th bean "b", this "color change" yields sum=2+3=5, and replace maximum with 5.
 3. Things got more complicated when white color joins. When we are iterating on "w" beans, we add the count to the current collection, assuming we are coloring these "w" beans to the color we are collecting. But when we encounters a "color change" (rw...b or bw...r), after maximum is compared to the sum, we are going the color the before collected white beans into the new color, maximizing the next collection.
-For instance, brwwwbr will be viewed as brrrrbr when we are at the 5th bean, but it becomes brbbbbr when we get to the 6th bean.
-Conclusion
-=====&lt;/p&gt;
+For instance, brwwwbr will be viewed as brrrrbr when we are at the 5th bean, but it becomes brbbbbr when we get to the 6th bean.&lt;/p&gt;
+&lt;h1&gt;Conclusion&lt;/h1&gt;
 &lt;p&gt;By sticking to the above three principles, we can dynamically sum up the numbers of last two same color collections, which can find the answer in O(n).&lt;/p&gt;
 &lt;h1&gt;Source Code&lt;/h1&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cp"&gt;#include &amp;lt;stdio.h&amp;gt; &lt;/span&gt;
