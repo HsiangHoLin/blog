@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>USACO Section 1.1 Broken Necklace</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Hsiang-Ho Lin">
+
+    <!-- Le styles -->
+    <link rel="stylesheet" href="/Blog/theme/css/bootstrap.min.css" type="text/css" />
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+      .tag-1 {
+        font-size: 13pt;
+      }
+      .tag-2 {
+        font-size: 10pt;
+      }
+      .tag-2 {
+        font-size: 8pt;
+      }
+      .tag-4 {
+        font-size: 6pt;
+     }
+    </style>
+    <link href="/Blog/theme/css/bootstrap-responsive.min.css" rel="stylesheet">
+        <link href="/Blog/theme/css/font-awesome.css" rel="stylesheet">
+
+    <link href="/Blog/theme/css/pygments.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="/Blog/theme/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/Blog/theme/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/Blog/theme/images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/Blog/theme/images/apple-touch-icon-114x114.png">
+
+    <link href="/Blog/" type="application/atom+xml" rel="alternate" title="Programming Journey ATOM Feed" />
+    
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/Blog/index.html">Programming Journey </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+                                                                    <li class="divider-vertical"></li>
+                                              <li >
+                    <a href="/Blog/category/python.html">
+						<i class="icon-folder-open icon-large"></i>Python
+					</a>
+                  </li>
+                                <li class="active">
+                    <a href="/Blog/category/c.html">
+						<i class="icon-folder-open icon-large"></i>C
+					</a>
+                  </li>
+              
+                          <ul class="nav pull-right">
+                                <li><a href="/Blog/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+                          </ul>
+
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="span9" id="content">
+            <section id="content">
+        <article>
+                <header>
+                        <h1>
+                                <a href=""
+                                        rel="bookmark"
+                                        title="Permalink to USACO Section 1.1 Broken Necklace">
+                                        USACO Section 1.1 Broken Necklace
+                                </a>
+                                                        </h1>
+                </header>
+                <div class="entry-content">
+                <div class="well">
+                        <footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2013-11-30T14:42:00">
+        <i class="icon-calendar"></i>Sat 30 November 2013
+</abbr>
+<span class="label">By</span>
+<a href="/Blog/author/hsiang-ho-lin.html"><i class="icon-user"></i>Hsiang-Ho Lin</a>
+<span class="label">Category</span>
+<a href="/Blog/category/c.html"><i class="icon-folder-open"></i>C</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/Blog/tag/c.html"><i class="icon-tag"></i>C</a>
+	<a href="/Blog/tag/usaco.html"><i class="icon-tag"></i>USACO</a>
+</footer><!-- /.post-info -->                </div>
+                <h1>The Problem</h1>
+<p>Let's describe the problem briefly here. Given a string a necklace composed with Red, Blue and White beans, we are going to find the maximum number of beans we can collected if we can choose to break the necklace at a certain point. By "maximum number of beans we can collected", I mean starting from the break point, we collect beads of the same color from one end until you reach a bead of a different color, and do the same for the other end.</p>
+<p>What's special is that when collecting beads, a white bead that is encountered may be treated as either red or blue and then painted with the desired color.</p>
+<h1>The Solution</h1>
+<p>At first I think I can just use the simple-minded approach which is to try to break the necklace at each point and calculate how much beans I can get at that certain point. When this is done from start to end, we are able to obtain the maximum number of beans we can collected.
+However, I have a feeling that a dynamic programming algorithm would be much more challenging and fun. So this is my approach of dynamic programming.
+The main idea here is to iterate the ring once and we can dynamically sum up the numbers of last two same color collections. Finally, the maximum of the sums is the answer.
+1. We are going to duplicated the necklace string and concatenate one to the other. For instance, if the necklace is rbwwrbbb, it will be made rbwwrbbbrbwwrbbb. The reason for this is that necklace is actually a ring, not a list. By doing this, we provide the illusion for the program that we are iterating in the ring.
+2. Supposing we only have red and blue beans, while iterating the string from head to tail, we accumulate beans with same color, and if we have encountered a different color from what we are collecting now (let's call it a "color change"), we will store the current number of same color beans and start accumulate beans with the other color. In the meanwhile of "color change", we are going to sum up the past two numbers of different color beans collection, and compare it to the maximum number, if the sum is greater, replace the maximum number with the sum.
+For instance, when we encounter the 5th bean "r" in rrbbrrrb, we have already stored the number of first 2 "r"s, 2, and the 3rd and 4th beans "b"s, 2, so now we got 2+2=4 to be our maximum. If we encounter the 8th bean "b", this "color change" yields sum=2+3=5, and replace maximum with 5.
+3. Things got more complicated when white color joins. When we are iterating on "w" beans, we add the count to the current collection, assuming we are coloring these "w" beans to the color we are collecting. But when we encounters a "color change" (rw...b or bw...r), after maximum is compared to the sum, we are going the color the before collected white beans into the new color, maximizing the next collection.
+For instance, brwwwbr will be viewed as brrrrbr when we are at the 5th bean, but it becomes brbbbbr when we get to the 6th bean.
+Conclusion</p>
+<p>By sticking to the above three principles, we can dynamically sum up the numbers of last two same color collections, which can find the answer in O(n).</p>
+<h1>Source Code</h1>
+<div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt; </span>
+<span class="cp">#define BUF_SIZE 1024 </span>
+<span class="kt">int</span> <span class="nf">main</span> <span class="p">()</span> <span class="p">{</span> 
+    <span class="kt">FILE</span> <span class="n">fin</span> <span class="o">=</span> <span class="n">fopen</span> <span class="p">(</span><span class="s">&quot;beads.in&quot;</span><span class="p">,</span> <span class="s">&quot;r&quot;</span><span class="p">);</span> 
+    <span class="kt">FILE</span> <span class="n">fout</span> <span class="o">=</span> <span class="n">fopen</span> <span class="p">(</span><span class="s">&quot;beads.out&quot;</span><span class="p">,</span> <span class="s">&quot;w&quot;</span><span class="p">);</span> 
+    <span class="kt">int</span> <span class="n">size</span><span class="p">;</span> 
+    <span class="kt">int</span> <span class="n">it_len</span><span class="p">;</span> 
+    <span class="kt">int</span> <span class="n">i</span><span class="p">;</span> 
+    <span class="kt">int</span> <span class="n">state</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span> 
+    <span class="kt">char</span> <span class="n">beads</span><span class="p">[</span><span class="n">BUF_SIZE</span><span class="p">];</span> 
+    <span class="kt">int</span> <span class="n">answer</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> 
+    <span class="kt">int</span> <span class="n">sum1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> 
+    <span class="kt">int</span> <span class="n">sum2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> 
+    <span class="kt">int</span> <span class="n">w_combo</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> 
+    <span class="kt">int</span> <span class="n">w_walk</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> 
+    <span class="k">if</span><span class="p">(</span><span class="n">fin</span><span class="p">)</span> 
+    <span class="p">{</span> 
+        <span class="n">fscanf</span><span class="p">(</span><span class="n">fin</span><span class="p">,</span> <span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">size</span><span class="p">);</span> 
+        <span class="n">fgets</span><span class="p">(</span><span class="n">beads</span><span class="p">,</span> <span class="n">BUF_SIZE</span><span class="p">,</span> <span class="n">fin</span><span class="p">);</span> 
+        <span class="n">it_len</span> <span class="o">=</span> <span class="n">size</span> <span class="o">*</span> <span class="mi">2</span><span class="p">;</span> 
+        <span class="n">memcpy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">beads</span><span class="p">[</span><span class="n">size</span><span class="p">],</span><span class="o">&amp;</span><span class="n">beads</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">size</span><span class="p">);</span> 
+        <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">it_len</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> 
+        <span class="p">{</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">beads</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;r&#39;</span> <span class="o">||</span> <span class="n">beads</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;b&#39;</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">sum2</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+                <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="n">sum2</span> <span class="o">=</span> <span class="n">size</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">for</span><span class="p">(;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">it_len</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> 
+        <span class="p">{</span> 
+            <span class="k">if</span><span class="p">(</span><span class="n">beads</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;w&#39;</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">w_walk</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+                <span class="n">w_combo</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> 
+                <span class="n">sum2</span><span class="o">++</span><span class="p">;</span>
+                <span class="n">beads</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">beads</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span>
+            <span class="p">}</span>
+            <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">beads</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">beads</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+            <span class="p">{</span>
+                <span class="n">sum2</span><span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">else</span>
+            <span class="p">{</span>
+                <span class="k">if</span><span class="p">((</span><span class="n">sum1</span><span class="o">+</span><span class="n">sum2</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">answer</span><span class="p">)</span>
+                <span class="n">answer</span> <span class="o">=</span> <span class="n">sum1</span><span class="o">+</span><span class="n">sum2</span><span class="p">;</span>
+                <span class="n">sum1</span> <span class="o">=</span> <span class="n">sum2</span><span class="p">;</span>
+                <span class="n">sum2</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">w_walk</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">sum2</span> <span class="o">+=</span> <span class="n">w_combo</span><span class="p">;</span>
+                <span class="n">sum1</span> <span class="o">-=</span> <span class="n">w_combo</span><span class="p">;</span>
+            <span class="p">}</span>
+                <span class="n">w_walk</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+                <span class="n">w_combo</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span> 
+    <span class="p">}</span> 
+    <span class="k">if</span><span class="p">((</span><span class="n">sum1</span><span class="o">+</span><span class="n">sum2</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">answer</span><span class="p">)</span> 
+        <span class="n">answer</span> <span class="o">=</span> <span class="n">sum1</span><span class="o">+</span><span class="n">sum2</span><span class="p">;</span> 
+    <span class="k">if</span><span class="p">(</span><span class="n">answer</span> <span class="o">&gt;</span> <span class="n">size</span><span class="p">)</span> 
+        <span class="n">answer</span> <span class="o">=</span> <span class="n">size</span><span class="p">;</span> 
+    <span class="k">if</span><span class="p">(</span><span class="n">fout</span><span class="p">)</span> 
+        <span class="n">fprintf</span> <span class="p">(</span><span class="n">fout</span><span class="p">,</span> <span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">answer</span><span class="p">);</span> 
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</pre></div>
+
+
+<p>}</p>
+                </div><!-- /.entry-content -->
+                                <div class="comments">
+                <h2>Comments !</h2>
+                        <div id="disqus_thread"></div>
+                        <script type="text/javascript">
+                           var disqus_identifier = "posts/2013/11/usaco-broken-necklace/";
+                           (function() {
+                                var dsq = document.createElement('script');
+                                dsq.type = 'text/javascript'; dsq.async = true;
+                                dsq.src = 'http://blog-notmyidea.disqus.com/embed.js';
+                                (document.getElementsByTagName('head')[0] ||
+                                 document.getElementsByTagName('body')[0]).appendChild(dsq);
+                          })();
+                        </script>
+                </div>
+                        </article>
+</section>
+        </div><!--/span-->
+
+                <div class="span3 well sidebar-nav" id="sidebar">
+            <ul class="nav nav-list">
+<li class="nav-header"><h4><i class="icon-external-link"></i>blogroll</h4></li>
+    <li><a href="http://github.com"><i class="icon-external-link"></i>Github</a></li>
+    <li><a href="http://www.ntu.edu.tw"><i class="icon-external-link"></i>National Taiwan University</a></li>
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>Categories</h4></li>
+<li>
+<a href="/Blog/category/python.html">
+    <i class="icon-folder-open icon-large"></i>Python
+</a>
+</li>
+<li>
+<a href="/Blog/category/c.html">
+    <i class="icon-folder-open icon-large"></i>C
+</a>
+</li>
+
+<li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+<li class="tag-4">
+    <a href="/Blog/tag/pelican.html">
+        <i class="icon-tag icon-large"></i>pelican
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/Blog/tag/c.html">
+        <i class="icon-tag icon-large"></i>C
+    </a>
+</li>
+<li class="tag-4">
+    <a href="/Blog/tag/usaco.html">
+        <i class="icon-tag icon-large"></i>USACO
+    </a>
+</li>
+
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+      <footer>
+        <address id="about">
+                Proudly powered by <a href="http://pelican.notmyidea.org/">Pelican <i class="icon-external-link"></i></a>,
+                                which takes great advantage of <a href="http://python.org">Python <i class="icon-external-link"></i></a>.
+        </address><!-- /#about -->
+
+        <p>The theme is from <a href="http://twitter.github.com/bootstrap/">Bootstrap from Twitter <i class="icon-external-link"></i></a>,
+                   and <a href="http://fortawesome.github.com/Font-Awesome/">Font-Awesome <i class="icon-external-link"></i></a>, thanks!</p>
+      </footer>
+
+    </div><!--/.fluid-container-->
+
+
+            <script type="text/javascript">
+    var disqus_shortname = 'blog-notmyidea';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+
+    <!-- Le javascript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/Blog/theme/js/jquery-1.7.2.min.js"></script>
+    <script src="/Blog/theme/js/bootstrap.min.js"></script>
+  </body>
+</html>
