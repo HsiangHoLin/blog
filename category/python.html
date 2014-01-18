@@ -1,80 +1,122 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
-        <meta charset="utf-8">
-        <title>Programming Journey - Python</title>
-        <link rel="stylesheet" href="http://hsiangholin.github.io/theme/css/main.css">
-                <link href="http://hsiangholin.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Programming Journey Atom Feed" />
-                
-        <!--[if IE]>
-            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>Programming Journey - Python</title>
+
+    <link rel="stylesheet" href="http://hsiangholin.github.io/blog/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://hsiangholin.github.io/blog/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://hsiangholin.github.io/blog/theme/css/style.css" />
+    <link rel="stylesheet" href="http://hsiangholin.github.io/blog/theme/css/pygments.css" />	
+    <script src="http://hsiangholin.github.io/blog/theme/js/custom.modernizr.js"></script>
 </head>
 
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="http://hsiangholin.github.io/">Programming Journey </a></h1>
-                <nav><ul>
-                                                                                    <li ><a href="http://hsiangholin.github.io/category/c.html">C</a></li>
-                                    <li class="active"><a href="http://hsiangholin.github.io/category/python.html">Python</a></li>
-                                                </ul></nav>
-        </header><!-- /#banner -->
-                
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://hsiangholin.github.io/blog">Programming Journey</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+	
+                    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+            
             
 
-                            <aside id="featured" class="body">
-                <article>
-                    <h1 class="entry-title"><a href="http://hsiangholin.github.io/my-first-pelican.html">My First Pelican Post</a></h1> 
-                    <footer class="post-info">
-        <abbr class="published" title="2014-01-12T14:42:00">
-                Sun 12 January 2014
-        </abbr>
+                            <article>
+                <a href="http://hsiangholin.github.io/blog/my-first-pelican.html"><h3 class="article-title">My First Pelican Post</h3></a>
+                <h6 class="subheader" title="2014-01-12T14:42:00">Sun 12 January 2014
+    </h6>
 
-                <address class="vcard author">
-                By <a class="url fn" href="http://hsiangholin.github.io/author/hsiang-ho-lin.html">Hsiang-Ho Lin</a>
-        </address>
-        <p>In <a href="http://hsiangholin.github.io/category/python.html">Python</a>. </p>
-<p>tags: <a href="http://hsiangholin.github.io/tag/pelican.html">pelican</a></p>
-</footer><!-- /.post-info --><p>I basically followed these posts:</p>
+
+<p>I basically followed these posts:</p>
 <p><a href="http://martinbrochhaus.com/pelican2.html">http://martinbrochhaus.com/pelican2.html</a></p>
 <p><a href="https://gist.github.com/josefjezek/6053301">https://gist.github.com/josefjezek/6053301</a></p>
 <p>But I got this error message when starting the Pelican developer server by "make devserver". The error message is "'bool' object is not callable". Turns out I need to install markdown by "pip install markdown".</p>
 <p>You should also notice that the site url variable should be padded with "/RepoNameHere" for hosting in github to work. For example, in my templates/index.html, I have to replace "{{ SITEURL }}/" with "{{ SITEURL }}/Blog".</p>
-<p>Now I need to learn some markdown syntaxes.</p>                </article>
-                                    <p class="paginator">
-        Page 1 / 1
+<p>Now I need to learn some markdown syntaxes.</p><p class="subheader">Category: <a href="http://hsiangholin.github.io/blog/category/python.html">Python</a>
+
+    Tagged: 
+        <a href="http://hsiangholin.github.io/blog/tag/pelican.html">pelican </a>
     </p>
-                            </aside><!-- /#featured -->
-                                                </ol><!-- /#posts-list -->
-                        </section><!-- /#content -->
-                    <section id="extras" class="body">
-                        <div class="blogroll">
-                        <h2>blogroll</h2>
-                        <ul>
-                                                    <li><a href="http://getpelican.com/">Pelican</a></li>
-                                                    <li><a href="http://python.org/">Python.org</a></li>
-                                                    <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
-                                                    <li><a href="#">You can modify those links in your config file</a></li>
-                                                </ul>
-                </div><!-- /.blogroll -->
-                                <div class="social">
-                        <h2>social</h2>
-                        <ul>
-                            <li><a href="http://hsiangholin.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
-                            
-                                                    <li><a href="#">You can add links in your config file</a></li>
-                                                    <li><a href="#">Another social link</a></li>
-                                                </ul>
-                </div><!-- /.social -->
-                </section><!-- /#extras -->
 
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
-                </address><!-- /#about -->
 
-                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
-        </footer><!-- /#contentinfo -->
 
-</body>
-</html>
+<p><a href="http://hsiangholin.github.io/blog/my-first-pelican.html#disqus_thread">comments</a></p>            </article>
+
+                            <div class="pagination-centered">
+<h6 class="subheader">Page 1 of 1</h6>
+
+<p>
+    
+    </p>
+</div>
+            
+            
+                
+                    <!-- /#posts-list -->
+                        
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://hsiangholin.github.io/blog/archives.html">Archives</a>
+            <li><a href="http://hsiangholin.github.io/blog/tags.html">Tags</a>
+                                </ul>
+
+        		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+                    <li><a href="http://hsiangholin.github.io/blog/category/python.html">Python</a></li>
+                    <li><a href="http://hsiangholin.github.io/blog/category/c.html">C</a></li>
+           
+        </ul>
+        
+                <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+                    <li><a href="http://github.com">Github</a></li>
+                    <li><a href="http://www.ntu.edu.tw">National Taiwan University</a></li>
+                </ul>
+        		
+        
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+                <p>Programming Journey by Hsiang-Ho Lin</p>
+            </div>
+            </div>
+    </div>
+</footer>
