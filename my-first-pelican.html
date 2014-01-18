@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
         <meta charset="utf-8">
-        <title>Programming Journey</title>
+        <title>My First Pelican Post</title>
         <link rel="stylesheet" href="http://hsiangholin.github.io/theme/css/main.css">
                 <link href="http://hsiangholin.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Programming Journey Atom Feed" />
                 
@@ -16,13 +16,38 @@
                 <h1><a href="http://hsiangholin.github.io/">Programming Journey </a></h1>
                 <nav><ul>
                                                                                     <li ><a href="http://hsiangholin.github.io/category/c.html">C</a></li>
-                                    <li ><a href="http://hsiangholin.github.io/category/python.html">Python</a></li>
+                                    <li class="active"><a href="http://hsiangholin.github.io/category/python.html">Python</a></li>
                                                 </ul></nav>
         </header><!-- /#banner -->
-        <ul>
-    <li><a href="http://hsiangholin.github.io/category/c.html">C</a></li>
-    <li><a href="http://hsiangholin.github.io/category/python.html">Python</a></li>
-</ul>
+        <section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="http://hsiangholin.github.io/my-first-pelican.html" rel="bookmark"
+           title="Permalink to My First Pelican Post">My First Pelican Post</a></h1>
+          </header>
+
+    <div class="entry-content">
+      <footer class="post-info">
+        <abbr class="published" title="2014-01-12T14:42:00">
+                Sun 12 January 2014
+        </abbr>
+
+                <address class="vcard author">
+                By <a class="url fn" href="http://hsiangholin.github.io/author/hsiang-ho-lin.html">Hsiang-Ho Lin</a>
+        </address>
+        <p>In <a href="http://hsiangholin.github.io/category/python.html">Python</a>. </p>
+<p>tags: <a href="http://hsiangholin.github.io/tag/pelican.html">pelican</a></p>
+</footer><!-- /.post-info -->      <p>I basically followed these posts:</p>
+<p><a href="http://martinbrochhaus.com/pelican2.html">http://martinbrochhaus.com/pelican2.html</a></p>
+<p><a href="https://gist.github.com/josefjezek/6053301">https://gist.github.com/josefjezek/6053301</a></p>
+<p>But I got this error message when starting the Pelican developer server by "make devserver". The error message is "'bool' object is not callable". Turns out I need to install markdown by "pip install markdown".</p>
+<p>You should also notice that the site url variable should be padded with "/RepoNameHere" for hosting in github to work. For example, in my templates/index.html, I have to replace "{{ SITEURL }}/" with "{{ SITEURL }}/Blog".</p>
+<p>Now I need to learn some markdown syntaxes.</p>
+    </div><!-- /.entry-content -->
+    
+  </article>
+</section>
         <section id="extras" class="body">
                         <div class="blogroll">
                         <h2>blogroll</h2>
