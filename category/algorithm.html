@@ -4,7 +4,7 @@
     <!-- Set the viewport width to device width for mobile -->
     <meta name="viewport" content="width=device-width" />
 
-    <title>Programming Journey - C</title>
+    <title>Programming Journey - Algorithm</title>
 
     <link rel="stylesheet" href="http://hsiangholin.github.io/blog/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://hsiangholin.github.io/blog/theme/css/foundation.min.css" />
@@ -46,23 +46,45 @@
             
 
                             <article>
+                <a href="http://hsiangholin.github.io/blog/levenshtein-distance-spelling-correction.html"><h3 class="article-title">Levenshtein Distance Spelling Correction</h3></a>
+                <h6 class="subheader" title="2014-01-18T16:20:00">Sat 18 January 2014
+    </h6>
+
+
+<p>As I started looking into spelling correction, I begin to stumble on several interesting essays about spelling correction. Here are what I've got about Levenshtein Distance Spelling Correction.</p>
+<p>But first, we should learn something about <a href="http://en.wikipedia.org/wiki/Levenshtein_distance">Levenshtein Distance</a>.</p>
+<h3>Peter Norvig's algorithm</h3>
+<p>The origin of Levenshtein Distance Spelling Correction can be traced to <a href="http://en.wikipedia.org/wiki/Peter_Norvig">Peter Norvig</a>'s famous essay, <a href="http://norvig.com/spell-correct.html">How to Write a Spelling Corrector</a>.</p>
+<p>In Peter Norvig's algorithm, he stores his dictionary words in a python dictionary (similar to a hash table) for lookup. Then he takes the target word (which is probably a mis-spelled word) and generate a list of its spelling mutations in levenshtein distance 2. For every spelling mutation C in the dictionary, Peter Norvig would calculate the probability of C given the original word W and try to find the C with maximum probability.</p>
+<h3>Other Algorithms</h3>
+<p><a href="http://stevehanov.ca/blog/index.php?id=114">Steve Hanvo's post on Levenshtein Distance approach</a> takes the target word and search the whole dictionary and find the dictionary word with least Levenshtein Distance.</p>
+<p>What's interesting is how the author improves it. He figured by storing the dictionary words to the <a href="http://en.wikipedia.org/wiki/Trie">trie</a>, a great deal of cost in calculating Levenshtein Distance can be saved. This is due to the property of prefix trie and the calculation of Levenshtein Distance, which allows the reusing of calculation results. Further improvements includes compressing the trie into a <a href="http://en.wikipedia.org/wiki/Deterministic_acyclic_finite_state_automaton">deterministic acyclic finite state automaton(DAFSA) or directed acyclic word graph (DAWG)</a> and a hash table to minimize memory usage.</p>
+<p><a href="http://nullwords.wordpress.com/2013/03/13/the-bk-tree-a-data-structure-for-spell-checking">The BK-Tree</a> is a data structure in improving the dictionary searching, reducing the search time from O(n) to O(log n). Compared to the previously mentioned dictionary search, instead of searching the whole dictionary, the BK-Tree allows partial search.</p>
+<h3>Reddit Discussion</h3>
+<p><a href="http://www.reddit.com/r/programming/comments/1v2x5a/1000x_faster_spelling_correction_algorithm/">Here is a interesting reddit discussion</a> about this topic.</p><p class="subheader">Category: <a href="http://hsiangholin.github.io/blog/category/algorithm.html">Algorithm</a>
+
+    Tagged: 
+        <a href="http://hsiangholin.github.io/blog/tag/algorithm.html">Algorithm </a>
+    </p>
+
+
+
+<p><a href="http://hsiangholin.github.io/blog/levenshtein-distance-spelling-correction.html#disqus_thread">comments</a></p>            </article>
+
+            
+                            <hr  class="gradient"/>
+            
+                
+                    
+
+                
+            <article>
                 <a href="http://hsiangholin.github.io/blog/crzinput.html"><h3 class="article-title">CrzInput: Spelling Correction with Gesture</h3></a>
                 <h6 class="subheader" title="2014-01-11T14:42:00">Sat 11 January 2014
     </h6>
 
 
-<p>One day I was suddenly curious about how Apple implemented the English auto-correction feature so I started wondering that might be something with Viterbi Algorithm. Then I went on github for some search, then I found this repo, <a href="https://github.com/HsiangHoLin/crzinput">CrzInput</a>.</p>
-<h3>The Algorithm</h3>
-<p>The algorithm inside crzinput is very simple. In sum, it takes the vector formed by user input on keyboard layout and compare it with the vectors in the predefined dictionary. Then the algorithms tries to find the dictionary word that is clostest to the input vector. To be more specific, the two vectors are normalized, and then we calculate the product of the two vectors. The closer their product is to 1, the more similar the twoe vectors are.</p>
-<p>For example, after user typed "dog" on the keyboard, there will be two 2-D vectors, one is d-&gt;o and the other is o-&gt;g. The d-&gt;o vector, V1 is represented by (Xv1, Yv1) and the o-&gt;g vector, V2, is represented by (Xv2, Yv2). Thus, combining the two vectors into one, (Xv1, Yv1, Xv2, Yv2), we can represents the user input in only one vector. This solution is low complexity and practical.</p>
-<h3>Limitations</h3>
-<p>The algorithm compares the input word only with dictionary words with same length, that is, it cannot do something like word completing. Apple, however, features both word completing and correction.</p>
-<p>Moreover, calculating normalized product means the algorithm won't take vectors' lengths into consideration, which I think would be helpful in enhancing accuracy.</p>
-<p>The other critical problem is when the user input is a zero vector, the algorithm doesn't work because computing product with zero vector will always get zero.</p>
-<h3>My Enhancement</h3>
-<p>To take both vector length and relative angle into consideration, I propose an algorithm to compute the distance between the vectors, that is |V1-V2|. The closer the distance, the more similar two vectors are.</p>
-<p>I also implemented in a python script to compare the result of both algorithms. </p>
-<p>Moreover, considering that most of the time users only miss some characters of the whole typing, my proposed algorithm also take the matched character counts into consideration. The more charactors the user input and the dictionary word match, the more likely users mean the dictionary word.</p><p class="subheader">Category: <a href="http://hsiangholin.github.io/blog/category/algorithm.html">Algorithm</a>
+<p>One day I was suddenly curious about how Apple implemented the English auto-correction feature so I started wondering that might be something with Viterbi Algorithm. Then I went on github for some search, then I found this repo, <a href="https://github.com/HsiangHoLin/crzinput">CrzInput</a>.</p><p class="subheader">Category: <a href="http://hsiangholin.github.io/blog/category/algorithm.html">Algorithm</a>
 
     Tagged: 
         <a href="http://hsiangholin.github.io/blog/tag/c.html">C </a>
@@ -71,12 +93,10 @@
 
 
 
-<p><a href="http://hsiangholin.github.io/blog/crzinput.html#disqus_thread">comments</a></p>            </article>
-
-            
-                            <hr  class="gradient"/>
-            
-                
+<p><a href="http://hsiangholin.github.io/blog/crzinput.html#disqus_thread">comments</a></p>                <a class="button radius secondary small right" href="http://hsiangholin.github.io/blog/crzinput.html">Read More</a>
+                <hr  class="gradient"/>
+            </article>
+        
                     
 
                 

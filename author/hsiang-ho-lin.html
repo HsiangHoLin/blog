@@ -46,25 +46,32 @@
             
 
                             <article>
-                <a href="http://hsiangholin.github.io/blog/my-first-pelican.html"><h3 class="article-title">My First Pelican Post</h3></a>
-                <h6 class="subheader" title="2014-01-12T14:42:00">Sun 12 January 2014
+                <a href="http://hsiangholin.github.io/blog/crzinput.html"><h3 class="article-title">CrzInput: Spelling Correction with Gesture</h3></a>
+                <h6 class="subheader" title="2014-01-11T14:42:00">Sat 11 January 2014
     </h6>
 
 
-<p>I basically followed these posts:</p>
-<p><a href="http://martinbrochhaus.com/pelican2.html">http://martinbrochhaus.com/pelican2.html</a></p>
-<p><a href="https://gist.github.com/josefjezek/6053301">https://gist.github.com/josefjezek/6053301</a></p>
-<p>But I got this error message when starting the Pelican developer server by "make devserver". The error message is "'bool' object is not callable". Turns out I need to install markdown by "pip install markdown".</p>
-<p>You should also notice that the site url variable should be padded with "/RepoNameHere" for hosting in github to work. For example, in my templates/index.html, I have to replace "{{ SITEURL }}/" with "{{ SITEURL }}/Blog".</p>
-<p>Now I need to learn some markdown syntaxes.</p><p class="subheader">Category: <a href="http://hsiangholin.github.io/blog/category/python.html">Python</a>
+<p>One day I was suddenly curious about how Apple implemented the English auto-correction feature so I started wondering that might be something with Viterbi Algorithm. Then I went on github for some search, then I found this repo, <a href="https://github.com/HsiangHoLin/crzinput">CrzInput</a>.</p>
+<h3>The Algorithm</h3>
+<p>The algorithm inside crzinput is very simple. In sum, it takes the vector formed by user input on keyboard layout and compare it with the vectors in the predefined dictionary. Then the algorithms tries to find the dictionary word that is clostest to the input vector. To be more specific, the two vectors are normalized, and then we calculate the product of the two vectors. The closer their product is to 1, the more similar the twoe vectors are.</p>
+<p>For example, after user typed "dog" on the keyboard, there will be two 2-D vectors, one is d-&gt;o and the other is o-&gt;g. The d-&gt;o vector, V1 is represented by (Xv1, Yv1) and the o-&gt;g vector, V2, is represented by (Xv2, Yv2). Thus, combining the two vectors into one, (Xv1, Yv1, Xv2, Yv2), we can represents the user input in only one vector. This solution is low complexity and practical.</p>
+<h3>Limitations</h3>
+<p>The algorithm compares the input word only with dictionary words with same length, that is, it cannot do something like word completing. Apple, however, features both word completing and correction.</p>
+<p>Moreover, calculating normalized product means the algorithm won't take vectors' lengths into consideration, which I think would be helpful in enhancing accuracy.</p>
+<p>The other critical problem is when the user input is a zero vector, the algorithm doesn't work because computing product with zero vector will always get zero.</p>
+<h3>My Enhancement</h3>
+<p>To take both vector length and relative angle into consideration, I propose an algorithm to compute the distance between the vectors, that is |V1-V2|. The closer the distance, the more similar two vectors are.</p>
+<p>I also implemented in a python script to compare the result of both algorithms. </p>
+<p>Moreover, considering that most of the time users only miss some characters of the whole typing, my proposed algorithm also take the matched character counts into consideration. The more charactors the user input and the dictionary word match, the more likely users mean the dictionary word.</p><p class="subheader">Category: <a href="http://hsiangholin.github.io/blog/category/algorithm.html">Algorithm</a>
 
     Tagged: 
-        <a href="http://hsiangholin.github.io/blog/tag/pelican.html">pelican </a>
+        <a href="http://hsiangholin.github.io/blog/tag/c.html">C </a>
+        <a href="http://hsiangholin.github.io/blog/tag/algorithm.html">Algorithm </a>
     </p>
 
 
 
-<p><a href="http://hsiangholin.github.io/blog/my-first-pelican.html#disqus_thread">comments</a></p>            </article>
+<p><a href="http://hsiangholin.github.io/blog/crzinput.html#disqus_thread">comments</a></p>            </article>
 
             
                             <hr  class="gradient"/>
@@ -74,16 +81,60 @@
 
                 
             <article>
+                <a href="http://hsiangholin.github.io/blog/levenshtein-distance-spelling-correction.html"><h3 class="article-title">Levenshtein Distance Spelling Correction</h3></a>
+                <h6 class="subheader" title="2014-01-18T16:20:00">Sat 18 January 2014
+    </h6>
+
+
+<p>As I started looking into spelling correction, I begin to stumble on several interesting essays about spelling correction. Here are what I've got about Levenshtein Distance Spelling Correction.</p><p class="subheader">Category: <a href="http://hsiangholin.github.io/blog/category/algorithm.html">Algorithm</a>
+
+    Tagged: 
+        <a href="http://hsiangholin.github.io/blog/tag/algorithm.html">Algorithm </a>
+    </p>
+
+
+
+<p><a href="http://hsiangholin.github.io/blog/levenshtein-distance-spelling-correction.html#disqus_thread">comments</a></p>                <a class="button radius secondary small right" href="http://hsiangholin.github.io/blog/levenshtein-distance-spelling-correction.html">Read More</a>
+                <hr  class="gradient"/>
+            </article>
+        
+                    
+
+                
+            <article>
+                <a href="http://hsiangholin.github.io/blog/my-first-pelican.html"><h3 class="article-title">My First Pelican Post</h3></a>
+                <h6 class="subheader" title="2013-09-12T14:42:00">Thu 12 September 2013
+    </h6>
+
+
+<p>I basically followed these posts. <a href="http://martinbrochhaus.com/pelican2.html">http://martinbrochhaus.com/pelican2.html</a> and <a href="https://gist.github.com/josefjezek/6053301">https://gist.github.com/josefjezek/6053301</a></p><p class="subheader">Category: <a href="http://hsiangholin.github.io/blog/category/misc.html">MISC</a>
+
+    Tagged: 
+        <a href="http://hsiangholin.github.io/blog/tag/pelican.html">Pelican </a>
+        <a href="http://hsiangholin.github.io/blog/tag/github.html">Github </a>
+    </p>
+
+
+
+<p><a href="http://hsiangholin.github.io/blog/my-first-pelican.html#disqus_thread">comments</a></p>                <a class="button radius secondary small right" href="http://hsiangholin.github.io/blog/my-first-pelican.html">Read More</a>
+                <hr  class="gradient"/>
+            </article>
+        
+                    
+
+                
+            <article>
                 <a href="http://hsiangholin.github.io/blog/usaco-broken-necklace.html"><h3 class="article-title">USACO Section 1.1 Broken Necklace</h3></a>
                 <h6 class="subheader" title="2013-11-30T14:42:00">Sat 30 November 2013
     </h6>
 
 
-<p class="subheader">Category: <a href="http://hsiangholin.github.io/blog/category/c.html">C</a>
+<p>Let's describe the problem briefly here. Given a string a necklace composed with Red, Blue and White beans, we are going to find the maximum number of beans we can collected if we can choose to break the necklace at a certain point. By "maximum number of beans we can collected", I mean starting from the break point, we collect beads of the same color from one end until you reach a bead of a different color, and do the same for the other end.</p><p class="subheader">Category: <a href="http://hsiangholin.github.io/blog/category/algorithm.html">Algorithm</a>
 
     Tagged: 
         <a href="http://hsiangholin.github.io/blog/tag/c.html">C </a>
         <a href="http://hsiangholin.github.io/blog/tag/usaco.html">USACO </a>
+        <a href="http://hsiangholin.github.io/blog/tag/algorithm.html">Algorithm </a>
     </p>
 
 
@@ -115,8 +166,8 @@
         		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
-                    <li><a href="http://hsiangholin.github.io/blog/category/python.html">Python</a></li>
-                    <li><a href="http://hsiangholin.github.io/blog/category/c.html">C</a></li>
+                    <li><a href="http://hsiangholin.github.io/blog/category/misc.html">MISC</a></li>
+                    <li><a href="http://hsiangholin.github.io/blog/category/algorithm.html">Algorithm</a></li>
            
         </ul>
         

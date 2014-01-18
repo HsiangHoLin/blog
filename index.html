@@ -46,25 +46,30 @@
             
 
                             <article>
-                <a href="http://hsiangholin.github.io/blog/my-first-pelican.html"><h3 class="article-title">My First Pelican Post</h3></a>
-                <h6 class="subheader" title="2014-01-12T14:42:00">Sun 12 January 2014
+                <a href="http://hsiangholin.github.io/blog/levenshtein-distance-spelling-correction.html"><h3 class="article-title">Levenshtein Distance Spelling Correction</h3></a>
+                <h6 class="subheader" title="2014-01-18T16:20:00">Sat 18 January 2014
     </h6>
 
 
-<p>I basically followed these posts:</p>
-<p><a href="http://martinbrochhaus.com/pelican2.html">http://martinbrochhaus.com/pelican2.html</a></p>
-<p><a href="https://gist.github.com/josefjezek/6053301">https://gist.github.com/josefjezek/6053301</a></p>
-<p>But I got this error message when starting the Pelican developer server by "make devserver". The error message is "'bool' object is not callable". Turns out I need to install markdown by "pip install markdown".</p>
-<p>You should also notice that the site url variable should be padded with "/RepoNameHere" for hosting in github to work. For example, in my templates/index.html, I have to replace "{{ SITEURL }}/" with "{{ SITEURL }}/Blog".</p>
-<p>Now I need to learn some markdown syntaxes.</p><p class="subheader">Category: <a href="http://hsiangholin.github.io/blog/category/python.html">Python</a>
+<p>As I started looking into spelling correction, I begin to stumble on several interesting essays about spelling correction. Here are what I've got about Levenshtein Distance Spelling Correction.</p>
+<p>But first, we should learn something about <a href="http://en.wikipedia.org/wiki/Levenshtein_distance">Levenshtein Distance</a>.</p>
+<h3>Peter Norvig's algorithm</h3>
+<p>The origin of Levenshtein Distance Spelling Correction can be traced to <a href="http://en.wikipedia.org/wiki/Peter_Norvig">Peter Norvig</a>'s famous essay, <a href="http://norvig.com/spell-correct.html">How to Write a Spelling Corrector</a>.</p>
+<p>In Peter Norvig's algorithm, he stores his dictionary words in a python dictionary (similar to a hash table) for lookup. Then he takes the target word (which is probably a mis-spelled word) and generate a list of its spelling mutations in levenshtein distance 2. For every spelling mutation C in the dictionary, Peter Norvig would calculate the probability of C given the original word W and try to find the C with maximum probability.</p>
+<h3>Other Algorithms</h3>
+<p><a href="http://stevehanov.ca/blog/index.php?id=114">Steve Hanvo's post on Levenshtein Distance approach</a> takes the target word and search the whole dictionary and find the dictionary word with least Levenshtein Distance.</p>
+<p>What's interesting is how the author improves it. He figured by storing the dictionary words to the <a href="http://en.wikipedia.org/wiki/Trie">trie</a>, a great deal of cost in calculating Levenshtein Distance can be saved. This is due to the property of prefix trie and the calculation of Levenshtein Distance, which allows the reusing of calculation results. Further improvements includes compressing the trie into a <a href="http://en.wikipedia.org/wiki/Deterministic_acyclic_finite_state_automaton">deterministic acyclic finite state automaton(DAFSA) or directed acyclic word graph (DAWG)</a> and a hash table to minimize memory usage.</p>
+<p><a href="http://nullwords.wordpress.com/2013/03/13/the-bk-tree-a-data-structure-for-spell-checking">The BK-Tree</a> is a data structure in improving the dictionary searching, reducing the search time from O(n) to O(log n). Compared to the previously mentioned dictionary search, instead of searching the whole dictionary, the BK-Tree allows partial search.</p>
+<h3>Reddit Discussion</h3>
+<p><a href="http://www.reddit.com/r/programming/comments/1v2x5a/1000x_faster_spelling_correction_algorithm/">Here is a interesting reddit discussion</a> about this topic.</p><p class="subheader">Category: <a href="http://hsiangholin.github.io/blog/category/algorithm.html">Algorithm</a>
 
     Tagged: 
-        <a href="http://hsiangholin.github.io/blog/tag/pelican.html">pelican </a>
+        <a href="http://hsiangholin.github.io/blog/tag/algorithm.html">Algorithm </a>
     </p>
 
 
 
-<p><a href="http://hsiangholin.github.io/blog/my-first-pelican.html#disqus_thread">comments</a></p>            </article>
+<p><a href="http://hsiangholin.github.io/blog/levenshtein-distance-spelling-correction.html#disqus_thread">comments</a></p>            </article>
 
             
                             <hr  class="gradient"/>
@@ -74,21 +79,66 @@
 
                 
             <article>
+                <a href="http://hsiangholin.github.io/blog/crzinput.html"><h3 class="article-title">CrzInput: Spelling Correction with Gesture</h3></a>
+                <h6 class="subheader" title="2014-01-11T14:42:00">Sat 11 January 2014
+    </h6>
+
+
+<p>One day I was suddenly curious about how Apple implemented the English auto-correction feature so I started wondering that might be something with Viterbi Algorithm. Then I went on github for some search, then I found this repo, <a href="https://github.com/HsiangHoLin/crzinput">CrzInput</a>.</p><p class="subheader">Category: <a href="http://hsiangholin.github.io/blog/category/algorithm.html">Algorithm</a>
+
+    Tagged: 
+        <a href="http://hsiangholin.github.io/blog/tag/c.html">C </a>
+        <a href="http://hsiangholin.github.io/blog/tag/algorithm.html">Algorithm </a>
+    </p>
+
+
+
+<p><a href="http://hsiangholin.github.io/blog/crzinput.html#disqus_thread">comments</a></p>                <a class="button radius secondary small right" href="http://hsiangholin.github.io/blog/crzinput.html">Read More</a>
+                <hr  class="gradient"/>
+            </article>
+        
+                    
+
+                
+            <article>
                 <a href="http://hsiangholin.github.io/blog/usaco-broken-necklace.html"><h3 class="article-title">USACO Section 1.1 Broken Necklace</h3></a>
                 <h6 class="subheader" title="2013-11-30T14:42:00">Sat 30 November 2013
     </h6>
 
 
-<p class="subheader">Category: <a href="http://hsiangholin.github.io/blog/category/c.html">C</a>
+<p>Let's describe the problem briefly here. Given a string a necklace composed with Red, Blue and White beans, we are going to find the maximum number of beans we can collected if we can choose to break the necklace at a certain point. By "maximum number of beans we can collected", I mean starting from the break point, we collect beads of the same color from one end until you reach a bead of a different color, and do the same for the other end.</p><p class="subheader">Category: <a href="http://hsiangholin.github.io/blog/category/algorithm.html">Algorithm</a>
 
     Tagged: 
         <a href="http://hsiangholin.github.io/blog/tag/c.html">C </a>
         <a href="http://hsiangholin.github.io/blog/tag/usaco.html">USACO </a>
+        <a href="http://hsiangholin.github.io/blog/tag/algorithm.html">Algorithm </a>
     </p>
 
 
 
 <p><a href="http://hsiangholin.github.io/blog/usaco-broken-necklace.html#disqus_thread">comments</a></p>                <a class="button radius secondary small right" href="http://hsiangholin.github.io/blog/usaco-broken-necklace.html">Read More</a>
+                <hr  class="gradient"/>
+            </article>
+        
+                    
+
+                
+            <article>
+                <a href="http://hsiangholin.github.io/blog/my-first-pelican.html"><h3 class="article-title">My First Pelican Post</h3></a>
+                <h6 class="subheader" title="2013-09-12T14:42:00">Thu 12 September 2013
+    </h6>
+
+
+<p>I basically followed these posts. <a href="http://martinbrochhaus.com/pelican2.html">http://martinbrochhaus.com/pelican2.html</a> and <a href="https://gist.github.com/josefjezek/6053301">https://gist.github.com/josefjezek/6053301</a></p><p class="subheader">Category: <a href="http://hsiangholin.github.io/blog/category/misc.html">MISC</a>
+
+    Tagged: 
+        <a href="http://hsiangholin.github.io/blog/tag/pelican.html">Pelican </a>
+        <a href="http://hsiangholin.github.io/blog/tag/github.html">Github </a>
+    </p>
+
+
+
+<p><a href="http://hsiangholin.github.io/blog/my-first-pelican.html#disqus_thread">comments</a></p>                <a class="button radius secondary small right" href="http://hsiangholin.github.io/blog/my-first-pelican.html">Read More</a>
                 <hr  class="gradient"/>
             </article>
         
@@ -115,8 +165,8 @@
         		
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
-                    <li><a href="http://hsiangholin.github.io/blog/category/python.html">Python</a></li>
-                    <li><a href="http://hsiangholin.github.io/blog/category/c.html">C</a></li>
+                    <li><a href="http://hsiangholin.github.io/blog/category/misc.html">MISC</a></li>
+                    <li><a href="http://hsiangholin.github.io/blog/category/algorithm.html">Algorithm</a></li>
            
         </ul>
         
