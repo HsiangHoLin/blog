@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Programming Journey</title><link href="http://hsiangholin.github.io/" rel="alternate"></link><link href="http://hsiangholin.github.io/feeds/about.atom.xml" rel="self"></link><id>http://hsiangholin.github.io/</id><updated>2013-09-11T12:42:00+02:00</updated><entry><title>About</title><link href="http://hsiangholin.github.io/posts/2013/09/about.html" rel="alternate"></link><updated>2013-09-11T12:42:00+02:00</updated><author><name>Hsiang-Ho Lin</name></author><id>tag:hsiangholin.github.io,2013-09-11:posts/2013/09/about.html</id><summary type="html">&lt;p&gt;Welcome to my blog.&lt;/p&gt;
 &lt;p&gt;My name is Hsiang-Ho Lin. I'm currently a software engineer living in Taiwan.&lt;/p&gt;
-&lt;p&gt;This are my &lt;a href="http://github.com/HsiangHoLin"&gt;github repos&lt;/a&gt;, enjoy!&lt;/p&gt;</summary><category term=""></category></entry></feed>
+&lt;p&gt;These are my &lt;a href="http://github.com/HsiangHoLin"&gt;github repos&lt;/a&gt;, enjoy!&lt;/p&gt;</summary><category term=""></category></entry></feed>
