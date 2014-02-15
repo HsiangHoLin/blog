@@ -4,7 +4,7 @@
     <!-- Set the viewport width to device width for mobile -->
     <meta name="viewport" content="width=device-width" />
 
-    <title>Programming Journey</title>
+    <title>fgets: How Many Characters/Byets Are Read?</title>
 
     <link rel="stylesheet" href="http://hsiangholin.github.io/blog/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://hsiangholin.github.io/blog/theme/css/foundation.min.css" />
@@ -42,16 +42,17 @@
 
     <!-- Main Blog Content -->
     <div class="large-9 columns">
-            
-            
+    <article>
+    <header>
+        <h3 class="article-title"><a href="http://hsiangholin.github.io/blog/posts/2014/02/how-many-characters-are-read.html" rel="bookmark"
+        title="Permalink to fgets: How Many Characters/Byets Are Read?">fgets: How Many Characters/Byets Are Read?</a></h3>
+            </header>
 
-                            <article>
-                <a href="http://hsiangholin.github.io/blog/posts/2014/02/how-many-characters-are-read.html"><h3 class="article-title">fgets: How Many Characters/Byets Are Read?</h3></a>
-                <h6 class="subheader" title="2014-02-15T10:31:00">Sat 15 February 2014
+    <h6 class="subheader" title="2014-02-15T10:31:00">Sat 15 February 2014
     </h6>
 
 
-<p>If you have ever used fgets, you probably know we check its return value to know if the reading is done, by comparing the return value with NULL.</p>
+    <p>If you have ever used fgets, you probably know we check its return value to know if the reading is done, by comparing the return value with NULL.</p>
 <p>But apparently fgets itself doesn't tell you how many characters or bytes are read every time you call it.</p>
 <p>To do this, we will need <a href="http://www.cplusplus.com/reference/cstdio/ftell/">ftell</a>. Every time after you called fgets to read from a "FILE", the position indicator of the "FILE" stream is moved to the position next to the end of what you have read, i.e. the beginning of the rest of the stream. ftell simply returns the current value of the position indicator of the "FILE" stream, so by comparing the positions you get before and after a fgets call, you will be able to know how many characters or bytes are just read.</p>
 <p>Test it:</p>
@@ -89,7 +90,8 @@
 
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
-</pre></div><p class="subheader">Category: <a href="http://hsiangholin.github.io/blog/category/c-language.html">C Language</a>
+</pre></div>
+    <p class="subheader">Category: <a href="http://hsiangholin.github.io/blog/category/c-language.html">C Language</a>
 
     Tagged: 
         <a href="http://hsiangholin.github.io/blog/tag/c.html">C </a>
@@ -97,88 +99,22 @@
 
 
 
-<p><a href="http://hsiangholin.github.io/blog/posts/2014/02/how-many-characters-are-read.html#disqus_thread">comments</a></p>            </article>
 
-            
-                            <hr  class="gradient"/>
-            
-                
-                    
+    	<h4>Comments</h4>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'hsiangholincs'
+        var disqus_identifier = "posts/2014/02/how-many-characters-are-read.html";
+        var disqus_url = "http://hsiangholin.github.io/blog/posts/2014/02/how-many-characters-are-read.html";
 
-                
-            <article>
-                <a href="http://hsiangholin.github.io/blog/posts/2014/01/levenshtein-distance-spelling-correction.html"><h3 class="article-title">Levenshtein Distance Spelling Correction</h3></a>
-                <h6 class="subheader" title="2014-01-18T16:20:00">Sat 18 January 2014
-    </h6>
-
-
-<p>As I started looking into spelling correction, I begin to stumble on several interesting essays about spelling correction. Here are what I've got about Levenshtein Distance Spelling Correction.</p><p class="subheader">Category: <a href="http://hsiangholin.github.io/blog/category/algorithm.html">Algorithm</a>
-
-    Tagged: 
-        <a href="http://hsiangholin.github.io/blog/tag/algorithm.html">Algorithm </a>
-    </p>
-
-
-
-<p><a href="http://hsiangholin.github.io/blog/posts/2014/01/levenshtein-distance-spelling-correction.html#disqus_thread">comments</a></p>                <a class="button radius secondary small right" href="http://hsiangholin.github.io/blog/posts/2014/01/levenshtein-distance-spelling-correction.html">Read More</a>
-                <hr  class="gradient"/>
-            </article>
-        
-                    
-
-                
-            <article>
-                <a href="http://hsiangholin.github.io/blog/posts/2014/01/crzinput.html"><h3 class="article-title">CrzInput: Spelling Correction with Gesture</h3></a>
-                <h6 class="subheader" title="2014-01-11T14:42:00">Sat 11 January 2014
-    </h6>
-
-
-<p>One day I was suddenly curious about how Apple implemented the English auto-correction feature so I started wondering that might be something with Viterbi Algorithm. Then I went on github for some search, then I found this repo, <a href="https://github.com/HsiangHoLin/crzinput">CrzInput</a>. And the effect is similar to <a href="http://fleksy.com/">Flesky</a>.</p><p class="subheader">Category: <a href="http://hsiangholin.github.io/blog/category/algorithm.html">Algorithm</a>
-
-    Tagged: 
-        <a href="http://hsiangholin.github.io/blog/tag/c.html">C </a>
-        <a href="http://hsiangholin.github.io/blog/tag/algorithm.html">Algorithm </a>
-    </p>
-
-
-
-<p><a href="http://hsiangholin.github.io/blog/posts/2014/01/crzinput.html#disqus_thread">comments</a></p>                <a class="button radius secondary small right" href="http://hsiangholin.github.io/blog/posts/2014/01/crzinput.html">Read More</a>
-                <hr  class="gradient"/>
-            </article>
-        
-                    
-
-                
-            <article>
-                <a href="http://hsiangholin.github.io/blog/posts/2013/11/usaco-broken-necklace.html"><h3 class="article-title">USACO Section 1.1 Broken Necklace</h3></a>
-                <h6 class="subheader" title="2013-11-30T14:42:00">Sat 30 November 2013
-    </h6>
-
-
-<p>Let's describe the problem briefly here. Given a string a necklace composed with Red, Blue and White beans, we are going to find the maximum number of beans we can collected if we can choose to break the necklace at a certain point. By "maximum number of beans we can collected", I mean starting from the break point, we collect beads of the same color from one end until you reach a bead of a different color, and do the same for the other end.</p><p class="subheader">Category: <a href="http://hsiangholin.github.io/blog/category/algorithm.html">Algorithm</a>
-
-    Tagged: 
-        <a href="http://hsiangholin.github.io/blog/tag/c.html">C </a>
-        <a href="http://hsiangholin.github.io/blog/tag/usaco.html">USACO </a>
-        <a href="http://hsiangholin.github.io/blog/tag/algorithm.html">Algorithm </a>
-    </p>
-
-
-
-<p><a href="http://hsiangholin.github.io/blog/posts/2013/11/usaco-broken-necklace.html#disqus_thread">comments</a></p>                <a class="button radius secondary small right" href="http://hsiangholin.github.io/blog/posts/2013/11/usaco-broken-necklace.html">Read More</a>
-                <hr  class="gradient"/>
-            </article>
-        
-                    <!-- /#posts-list -->
-                            <div class="pagination-centered">
-<h6 class="subheader">Page 1 of 2</h6>
-
-<p>
-    
-            <a href="http://hsiangholin.github.io/blog/index2.html">Next &raquo;</a>
-    </p>
-</div>
-                        
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </article>
     </div>
     <!-- End Main Content -->
 

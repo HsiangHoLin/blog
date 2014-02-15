@@ -46,32 +46,58 @@
             
 
                             <article>
-                <a href="http://hsiangholin.github.io/blog/crzinput.html"><h3 class="article-title">CrzInput: Spelling Correction with Gesture</h3></a>
-                <h6 class="subheader" title="2014-01-11T14:42:00">Sat 11 January 2014
+                <a href="http://hsiangholin.github.io/blog/posts/2014/02/how-many-characters-are-read.html"><h3 class="article-title">fgets: How Many Characters/Byets Are Read?</h3></a>
+                <h6 class="subheader" title="2014-02-15T10:31:00">Sat 15 February 2014
     </h6>
 
 
-<p>One day I was suddenly curious about how Apple implemented the English auto-correction feature so I started wondering that might be something with Viterbi Algorithm. Then I went on github for some search, then I found this repo, <a href="https://github.com/HsiangHoLin/crzinput">CrzInput</a>. And the effect is similar to <a href="http://fleksy.com/">Flesky</a>.</p>
-<h3>The Algorithm</h3>
-<p>The algorithm inside crzinput is very simple. In sum, it takes the vector formed by user input on keyboard layout and compare it with the vectors in the predefined dictionary. Then the algorithms tries to find the dictionary word that is clostest to the input vector. To be more specific, the two vectors are normalized, and then we calculate the product of the two vectors. The closer their product is to 1, the more similar the two vectors are.</p>
-<p>For example, after user typed "dog" on the keyboard, there will be two 2-D vectors, one is d-&gt;o and the other is o-&gt;g. The d-&gt;o vector, V1, is represented by (Xv1, Yv1) and the o-&gt;g vector, V2, is represented by (Xv2, Yv2). Thus, combining the two vectors into one, (Xv1, Yv1, Xv2, Yv2), we can represents the user input in only one vector. This solution is low complexity and practical. And the effect is similar to <a href="http://fleksy.com/">Flesky</a>.</p>
-<h3>Limitations</h3>
-<p>The algorithm compares the input word only with dictionary words with same length, that is, it cannot do something like word completing. Apple, however, features both word completing and correction.</p>
-<p>Moreover, calculating normalized product means the algorithm won't take vectors' lengths into consideration, which I think would be helpful in enhancing accuracy.</p>
-<p>The other critical problem is when the user input is a zero vector, the algorithm doesn't work because computing product with zero vector will always get zero.</p>
-<h3>My Enhancement</h3>
-<p>To take both vector length and relative angle into consideration, I propose an algorithm to compute the distance between the vectors, that is |V1-V2|. The closer the distance, the more similar two vectors are.</p>
-<p>I also implemented in a python script to compare the result of both algorithms. </p>
-<p>Moreover, considering that most of the time users only miss some characters of the whole typing, my proposed algorithm also take the matched character counts into consideration. The more charactors the user input and the dictionary word match, the more likely users mean the dictionary word.</p><p class="subheader">Category: <a href="http://hsiangholin.github.io/blog/category/algorithm.html">Algorithm</a>
+<p>If you have ever used fgets, you probably know we check its return value to know if the reading is done, by comparing the return value with NULL.</p>
+<p>But apparently fgets itself doesn't tell you how many characters or bytes are read every time you call it.</p>
+<p>To do this, we will need <a href="http://www.cplusplus.com/reference/cstdio/ftell/">ftell</a>. Every time after you called fgets to read from a "FILE", the position indicator of the "FILE" stream is moved to the position next to the end of what you have read, i.e. the beginning of the rest of the stream. ftell simply returns the current value of the position indicator of the "FILE" stream, so by comparing the positions you get before and after a fgets call, you will be able to know how many characters or bytes are just read.</p>
+<p>Test it:</p>
+<div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
+<span class="cp">#include &lt;stdlib.h&gt;</span>
+<span class="cp">#include &lt;string.h&gt;</span>
+
+<span class="cp">#define BUFF_SIZE 1024</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">FILE</span><span class="o">*</span> <span class="n">bs_fp</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="n">buff</span><span class="p">[</span><span class="n">BUFF_SIZE</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+    <span class="kt">int</span> <span class="n">last_pos</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">curr_pos</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="n">bs_fp</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="s">&quot;test.txt&quot;</span><span class="p">,</span> <span class="s">&quot;r&quot;</span><span class="p">);</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">bs_fp</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">goto</span> <span class="n">exit</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">while</span><span class="p">(</span><span class="n">fgets</span><span class="p">(</span><span class="n">buff</span><span class="p">,</span> <span class="n">BUFF_SIZE</span><span class="p">,</span> <span class="n">bs_fp</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span>
+    <span class="p">{</span>
+
+        <span class="n">curr_pos</span> <span class="o">=</span> <span class="n">ftell</span><span class="p">(</span><span class="n">bs_fp</span><span class="p">);</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;read size = %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="n">curr_pos</span> <span class="o">-</span> <span class="n">last_pos</span><span class="p">);</span>
+        <span class="n">last_pos</span> <span class="o">=</span> <span class="n">curr_pos</span><span class="p">;</span>
+    <span class="p">}</span>
+
+<span class="nl">exit:</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">bs_fp</span><span class="p">)</span>
+        <span class="n">fclose</span><span class="p">(</span><span class="n">bs_fp</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div><p class="subheader">Category: <a href="http://hsiangholin.github.io/blog/category/c-language.html">C Language</a>
 
     Tagged: 
         <a href="http://hsiangholin.github.io/blog/tag/c.html">C </a>
-        <a href="http://hsiangholin.github.io/blog/tag/algorithm.html">Algorithm </a>
     </p>
 
 
 
-<p><a href="http://hsiangholin.github.io/blog/crzinput.html#disqus_thread">comments</a></p>            </article>
+<p><a href="http://hsiangholin.github.io/blog/posts/2014/02/how-many-characters-are-read.html#disqus_thread">comments</a></p>            </article>
 
             
                             <hr  class="gradient"/>
@@ -81,7 +107,29 @@
 
                 
             <article>
-                <a href="http://hsiangholin.github.io/blog/usaco-broken-necklace.html"><h3 class="article-title">USACO Section 1.1 Broken Necklace</h3></a>
+                <a href="http://hsiangholin.github.io/blog/posts/2014/01/crzinput.html"><h3 class="article-title">CrzInput: Spelling Correction with Gesture</h3></a>
+                <h6 class="subheader" title="2014-01-11T14:42:00">Sat 11 January 2014
+    </h6>
+
+
+<p>One day I was suddenly curious about how Apple implemented the English auto-correction feature so I started wondering that might be something with Viterbi Algorithm. Then I went on github for some search, then I found this repo, <a href="https://github.com/HsiangHoLin/crzinput">CrzInput</a>. And the effect is similar to <a href="http://fleksy.com/">Flesky</a>.</p><p class="subheader">Category: <a href="http://hsiangholin.github.io/blog/category/algorithm.html">Algorithm</a>
+
+    Tagged: 
+        <a href="http://hsiangholin.github.io/blog/tag/c.html">C </a>
+        <a href="http://hsiangholin.github.io/blog/tag/algorithm.html">Algorithm </a>
+    </p>
+
+
+
+<p><a href="http://hsiangholin.github.io/blog/posts/2014/01/crzinput.html#disqus_thread">comments</a></p>                <a class="button radius secondary small right" href="http://hsiangholin.github.io/blog/posts/2014/01/crzinput.html">Read More</a>
+                <hr  class="gradient"/>
+            </article>
+        
+                    
+
+                
+            <article>
+                <a href="http://hsiangholin.github.io/blog/posts/2013/11/usaco-broken-necklace.html"><h3 class="article-title">USACO Section 1.1 Broken Necklace</h3></a>
                 <h6 class="subheader" title="2013-11-30T14:42:00">Sat 30 November 2013
     </h6>
 
@@ -96,7 +144,7 @@
 
 
 
-<p><a href="http://hsiangholin.github.io/blog/usaco-broken-necklace.html#disqus_thread">comments</a></p>                <a class="button radius secondary small right" href="http://hsiangholin.github.io/blog/usaco-broken-necklace.html">Read More</a>
+<p><a href="http://hsiangholin.github.io/blog/posts/2013/11/usaco-broken-necklace.html#disqus_thread">comments</a></p>                <a class="button radius secondary small right" href="http://hsiangholin.github.io/blog/posts/2013/11/usaco-broken-necklace.html">Read More</a>
                 <hr  class="gradient"/>
             </article>
         
@@ -124,7 +172,9 @@
         <h5 class="sidebar-title">Categories</h5>
         <ul class="side-nav">
                     <li><a href="http://hsiangholin.github.io/blog/category/misc.html">MISC</a></li>
+                    <li><a href="http://hsiangholin.github.io/blog/category/c-language.html">C Language</a></li>
                     <li><a href="http://hsiangholin.github.io/blog/category/algorithm.html">Algorithm</a></li>
+                    <li><a href="http://hsiangholin.github.io/blog/category/about.html">About</a></li>
            
         </ul>
         

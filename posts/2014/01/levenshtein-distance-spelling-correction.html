@@ -4,7 +4,7 @@
     <!-- Set the viewport width to device width for mobile -->
     <meta name="viewport" content="width=device-width" />
 
-    <title>Programming Journey - Algorithm</title>
+    <title>Levenshtein Distance Spelling Correction</title>
 
     <link rel="stylesheet" href="http://hsiangholin.github.io/blog/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://hsiangholin.github.io/blog/theme/css/foundation.min.css" />
@@ -42,16 +42,17 @@
 
     <!-- Main Blog Content -->
     <div class="large-9 columns">
-            
-            
+    <article>
+    <header>
+        <h3 class="article-title"><a href="http://hsiangholin.github.io/blog/posts/2014/01/levenshtein-distance-spelling-correction.html" rel="bookmark"
+        title="Permalink to Levenshtein Distance Spelling Correction">Levenshtein Distance Spelling Correction</a></h3>
+            </header>
 
-                            <article>
-                <a href="http://hsiangholin.github.io/blog/posts/2014/01/levenshtein-distance-spelling-correction.html"><h3 class="article-title">Levenshtein Distance Spelling Correction</h3></a>
-                <h6 class="subheader" title="2014-01-18T16:20:00">Sat 18 January 2014
+    <h6 class="subheader" title="2014-01-18T16:20:00">Sat 18 January 2014
     </h6>
 
 
-<p>As I started looking into spelling correction, I begin to stumble on several interesting essays about spelling correction. Here are what I've got about Levenshtein Distance Spelling Correction.</p>
+    <p>As I started looking into spelling correction, I begin to stumble on several interesting essays about spelling correction. Here are what I've got about Levenshtein Distance Spelling Correction.</p>
 <p>But first, we should learn something about <a href="http://en.wikipedia.org/wiki/Levenshtein_distance">Levenshtein Distance (or edit distance)</a>.</p>
 <h3>Peter Norvig's algorithm</h3>
 <p>The origin of Levenshtein Distance Spelling Correction can be traced to <a href="http://en.wikipedia.org/wiki/Peter_Norvig">Peter Norvig</a>'s famous essay, <a href="http://norvig.com/spell-correct.html">How to Write a Spelling Corrector</a>.</p>
@@ -61,7 +62,8 @@
 <p>What's interesting is how the author improves it. He figured by storing the dictionary words to the <a href="http://en.wikipedia.org/wiki/Trie">trie</a>, a great deal of cost in calculating Levenshtein Distance can be saved. This is due to the property of prefix trie and the calculation of Levenshtein Distance, which allows the reusing of calculation results. Further improvements includes compressing the trie into a <a href="http://en.wikipedia.org/wiki/Deterministic_acyclic_finite_state_automaton">deterministic acyclic finite state automaton (DAFSA) or directed acyclic word graph (DAWG)</a> and a hash table to minimize memory usage.</p>
 <p><a href="http://nullwords.wordpress.com/2013/03/13/the-bk-tree-a-data-structure-for-spell-checking">The BK-Tree</a> is a data structure in improving the dictionary searching, reducing the search time from O(n) to O(log n). Compared to the previously mentioned dictionary search, instead of searching the whole dictionary, the BK-Tree allows partial search.</p>
 <p><a href="http://www.reddit.com/r/programming/comments/1v2x5a/1000x_faster_spelling_correction_algorithm/">Here is an interesting reddit discussion</a> about this topic.</p>
-<p><a href="http://blog.mikemccandless.com/2011/03/lucenes-fuzzyquery-is-100-times-faster.html">A post about Lucene</a>, which features <a href="http://en.wikipedia.org/wiki/Levenshtein_automaton">Levenshtein Automaton</a>.</p><p class="subheader">Category: <a href="http://hsiangholin.github.io/blog/category/algorithm.html">Algorithm</a>
+<p><a href="http://blog.mikemccandless.com/2011/03/lucenes-fuzzyquery-is-100-times-faster.html">A post about Lucene</a>, which features <a href="http://en.wikipedia.org/wiki/Levenshtein_automaton">Levenshtein Automaton</a>.</p>
+    <p class="subheader">Category: <a href="http://hsiangholin.github.io/blog/category/algorithm.html">Algorithm</a>
 
     Tagged: 
         <a href="http://hsiangholin.github.io/blog/tag/algorithm.html">Algorithm </a>
@@ -69,66 +71,22 @@
 
 
 
-<p><a href="http://hsiangholin.github.io/blog/posts/2014/01/levenshtein-distance-spelling-correction.html#disqus_thread">comments</a></p>            </article>
 
-            
-                            <hr  class="gradient"/>
-            
-                
-                    
+    	<h4>Comments</h4>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'hsiangholincs'
+        var disqus_identifier = "posts/2014/01/levenshtein-distance-spelling-correction.html";
+        var disqus_url = "http://hsiangholin.github.io/blog/posts/2014/01/levenshtein-distance-spelling-correction.html";
 
-                
-            <article>
-                <a href="http://hsiangholin.github.io/blog/posts/2014/01/crzinput.html"><h3 class="article-title">CrzInput: Spelling Correction with Gesture</h3></a>
-                <h6 class="subheader" title="2014-01-11T14:42:00">Sat 11 January 2014
-    </h6>
-
-
-<p>One day I was suddenly curious about how Apple implemented the English auto-correction feature so I started wondering that might be something with Viterbi Algorithm. Then I went on github for some search, then I found this repo, <a href="https://github.com/HsiangHoLin/crzinput">CrzInput</a>. And the effect is similar to <a href="http://fleksy.com/">Flesky</a>.</p><p class="subheader">Category: <a href="http://hsiangholin.github.io/blog/category/algorithm.html">Algorithm</a>
-
-    Tagged: 
-        <a href="http://hsiangholin.github.io/blog/tag/c.html">C </a>
-        <a href="http://hsiangholin.github.io/blog/tag/algorithm.html">Algorithm </a>
-    </p>
-
-
-
-<p><a href="http://hsiangholin.github.io/blog/posts/2014/01/crzinput.html#disqus_thread">comments</a></p>                <a class="button radius secondary small right" href="http://hsiangholin.github.io/blog/posts/2014/01/crzinput.html">Read More</a>
-                <hr  class="gradient"/>
-            </article>
-        
-                    
-
-                
-            <article>
-                <a href="http://hsiangholin.github.io/blog/posts/2013/11/usaco-broken-necklace.html"><h3 class="article-title">USACO Section 1.1 Broken Necklace</h3></a>
-                <h6 class="subheader" title="2013-11-30T14:42:00">Sat 30 November 2013
-    </h6>
-
-
-<p>Let's describe the problem briefly here. Given a string a necklace composed with Red, Blue and White beans, we are going to find the maximum number of beans we can collected if we can choose to break the necklace at a certain point. By "maximum number of beans we can collected", I mean starting from the break point, we collect beads of the same color from one end until you reach a bead of a different color, and do the same for the other end.</p><p class="subheader">Category: <a href="http://hsiangholin.github.io/blog/category/algorithm.html">Algorithm</a>
-
-    Tagged: 
-        <a href="http://hsiangholin.github.io/blog/tag/c.html">C </a>
-        <a href="http://hsiangholin.github.io/blog/tag/usaco.html">USACO </a>
-        <a href="http://hsiangholin.github.io/blog/tag/algorithm.html">Algorithm </a>
-    </p>
-
-
-
-<p><a href="http://hsiangholin.github.io/blog/posts/2013/11/usaco-broken-necklace.html#disqus_thread">comments</a></p>                <a class="button radius secondary small right" href="http://hsiangholin.github.io/blog/posts/2013/11/usaco-broken-necklace.html">Read More</a>
-                <hr  class="gradient"/>
-            </article>
-        
-                    <!-- /#posts-list -->
-                            <div class="pagination-centered">
-<h6 class="subheader">Page 1 of 1</h6>
-
-<p>
-    
-    </p>
-</div>
-                        
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </article>
     </div>
     <!-- End Main Content -->
 
